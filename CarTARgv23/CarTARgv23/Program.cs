@@ -11,6 +11,13 @@ namespace CarTARgv23
 
             var app = builder.Build();
 
+            builder.Services.AddScoped<ICarServices, CarServices>();
+
+
+            builder.Services.AddDbContext<ShopTARgv23Context>(options =>
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+            b => b.MigrationsAssembly("CarTARgv23.Data")));
+
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
